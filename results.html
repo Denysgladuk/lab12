@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Результати</title>
+</head>
+<body>
+    <h1>Результати</h1>
+    <table id="resultsTable" border="1">
+        <tr>
+            <th>Кут</th>
+            <th>sin</th>
+            <th>cos</th>
+            <th>tg</th>
+        </tr>
+    </table>
+
+    <script>
+        var urlParams = new URLSearchParams(window.location.search);
+        var angleStart = parseFloat(urlParams.get('angleStart'));
+        var angleEnd = parseFloat(urlParams.get('angleEnd'));
+        var step = parseFloat(urlParams.get('step'));
+
+        var table = document.getElementById('resultsTable');
+
+        // генерування таблиці з результатами
+        for (var angle = angleStart; angle <= angleEnd; angle += step) {
+            var sinValue = Math.sin(angle * Math.PI / 180);
+            var cosValue = Math.cos(angle * Math.PI / 180);
+            var tanValue = Math.tan(angle * Math.PI / 180);
+
+            var row = table.insertRow();
+            var angleCell = row.insertCell(0);
+            var sinCell = row.insertCell(1);
+            var cosCell = row.insertCell(2);
+            var tanCell = row.insertCell(3);
+
+            angleCell.innerHTML = angle.toFixed(2);
+            sinCell.innerHTML = sinValue.toFixed(4);
+            cosCell.innerHTML = cosValue.toFixed(4);
+            tanCell.innerHTML = tanValue.toFixed(4);
+        }
+    </script>
+    <a href="towar.html">Друге завдання</a>
+    <a href="index.html">Назад на головну</a>
+</body>
+</html>

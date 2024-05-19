@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вихідні дані</title>
+    <script>
+        function isNumber(input) {
+            var value = input.value.trim();
+            if (value === '' || isNaN(value)) {
+                alert('Введіть числове значення.');
+                input.focus();
+                return false;
+            }
+            return true;
+        }
+
+        function sendParameters() {
+            var angleStartInput = document.getElementById('angleStart');
+            var angleEndInput = document.getElementById('angleEnd');
+            var stepInput = document.getElementById('step');
+
+            if (!isNumber(angleStartInput) || !isNumber(angleEndInput) || !isNumber(stepInput)) {
+                return;
+            }
+
+            var angleStart = parseFloat(angleStartInput.value);
+            var angleEnd = parseFloat(angleEndInput.value);
+            var step = parseFloat(stepInput.value);
+
+            if (angleStart >= angleEnd) {
+                alert('Початковий кут повинен бути менший за кінцевий кут.');
+                return;
+            }
+
+            window.location.href = 'results.html?angleStart=' + angleStart + '&angleEnd=' + angleEnd + '&step=' + step;
+        }
+    </script>
+</head>
+<body>
+    <h1>Вхідні дані</h1>
+    <form>
+        <label for="angleStart">Початковий кут:</label>
+        <input type="text" id="angleStart" required><br><br>
+
+        <label for="angleEnd">Кінцевий кут:</label>
+        <input type="text" id="angleEnd" required><br><br>
+
+        <label for="step">Крок:</label>
+        <input type="text" id="step" required><br><br>
+
+        <input type="button" value="Обчислити" onclick="sendParameters()">
+    </form>
+  <a href="towar.html">Друге завдання</a>
+</body>
+</html>

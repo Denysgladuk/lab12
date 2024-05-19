@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Зміна цін і кількості товару</title>
+</head>
+<body>
+    <h1>Зміна цін і кількості товару</h1>
+    <table id="goodsTable" border="1">
+        <tr>
+            <th>Назва товару</th>
+            <th>Ціна за одиницю</th>
+            <th>Кількість</th>
+            <th>Ціна</th>
+        </tr>
+        <tr>
+            <td>Стіл письменний</td>
+            <td>1200</td>
+            <td>5</td>
+            <td>6000</td>
+        </tr>
+        <tr>
+            <td>Стіл кухонний</td>
+            <td>8000</td>
+            <td>10</td>
+            <td>80000</td>
+        </tr>
+        <tr>
+            <td>Стільчик</td>
+            <td>20</td>
+            <td>1200</td>
+            <td>24000</td>
+        </tr>
+        <tr>
+            <td>Шкаф книжний</td>
+            <td>14200</td>
+            <td>4</td>
+            <td>56800</td>
+        </tr>
+        <tr>
+            <td colspan="4"><strong>Підсумок: <span id="totalPrice">220800</span></strong></td>
+        </tr>
+    </table>
+    
+    <br>
+    <div>
+        <label for="selectItem">Товар:</label>
+        <select id="selectItem">
+            <option value="Стіл письменний">Стіл письменний</option>
+            <option value="Стіл кухонний">Стіл кухонний</option>
+            <option value="Стільчик">Стільчик</option>
+            <option value="Шкаф книжний">Шкаф книжний</option>
+        </select>
+        <label for="newPrice">Ціна:</label>
+        <input type="text" id="newPrice">
+        <label for="newQuantity">Кількість:</label>
+        <input type="text" id="newQuantity">
+        <button onclick="updateTable()">Ввести</button>
+    </div>
+
+    <script>
+        function updateTable() {
+            var selectItem = document.getElementById('selectItem').value;
+            var newPrice = document.getElementById('newPrice').value;
+            var newQuantity = document.getElementById('newQuantity').value;
+
+            var rows = document.getElementById('goodsTable').rows;
+            for (var i = 1; i < rows.length - 1; i++) {
+                var cells = rows[i].cells;
+                var itemName = cells[0].innerText;
+                if (itemName === selectItem) {
+                    cells[1].innerText = newPrice;
+                    cells[2].innerText = newQuantity;
+                    cells[3].innerText = parseInt(newPrice) * parseInt(newQuantity);
+                    break;
+                }
+            }
+
+            // Оновлення підсумку
+            var total = 0;
+            for (var i = 1; i < rows.length - 1; i++) {
+                total += parseInt(rows[i].cells[3].innerText);
+            }
+            document.getElementById('totalPrice').innerText = total;
+        }
+    </script>
+    <a href="index.html">Назад на головну</a>
+</body>
+</html>
